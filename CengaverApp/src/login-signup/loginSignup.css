@@ -1,0 +1,54 @@
+.container{
+    margin: auto;
+    padding-bottom: 30px;  
+}
+
+.header{
+    align-items: center;
+    gap: 9px;
+}
+
+.text{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.underline {
+  width: 470px;
+  height: 2px;
+  background-color: black;
+  border-radius: 9px;
+}
+.inputs{
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.input input{
+    height: 50px;
+    width: 400px;
+    background: transparent;
+}
+
+.submit-container{
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    color: #fff;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.gray{
+    background-color: #EAEAEA;
+    color: #676767;
+}

@@ -1,42 +1,83 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './loginSignup.css'
 
 const LoginSignup = () => {
 
-  const [action, setAction] = useState('Login');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500)); 
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+  /*
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Replace with your API endpoint
+    const apiEndpoint = 'https://your-api-endpoint.com/login';
+
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) { 
+        // Navigate to dashboard on successful login
+        navigate('/dashboard');
+      } else {
+        // Handle errors
+        console.error('Login failed:', result.message);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+*/
   return (
       <div className="container">
         <div className="header">
-          <div className="text">{action}</div>
+          <div className="text">Login</div>
           <div className="underline"></div>
         </div>
-        <div className="inputs">
-        {action === "Login"? <div></div> : <div className="input"> 
-          <img src="" alt="" />
-          <input type="text" placeholder='Name'/>
-        </div>}
+        <form className="inputs" onSubmit={handleSubmit}>
         <div className="input"> 
           <img src="" alt="" />
-          <input type="email" placeholder='E mail'/>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
           <div className="input">
             <img src="" alt="" />
-            <input type="password" placeholder='Password'/>
+            <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           </div>
-        </div>
         <div className="submit-container">
-        <div
-          className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => setAction('Sign Up')}>
-          Sign Up
-        </div>
-        <div className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => setAction('Login')}>
+        <button type="submit" className="submit">
           Login
+        </button>
         </div>
-        </div>
+        </form>
       </div>
   );
 };

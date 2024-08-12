@@ -7,8 +7,9 @@ body, html {
 }
 
 .container {
-    width: 470px; /* Set a specific width for the container */
+    width: 470px; 
     padding-bottom: 30px;
+    min-width: 500px;
 }
 
 .header {

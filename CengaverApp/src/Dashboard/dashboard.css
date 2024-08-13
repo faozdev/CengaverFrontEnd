@@ -4,22 +4,52 @@
 
 .top-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #f4f4f4;
-    padding: 15px; 
+    padding: 15px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 100px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+}
+
+.dashboard-title {
+    margin: 0;
+    font-size: 24px; 
+}
+
+.top-bar-links {
+    display: flex;
+    align-items: center; 
+}
+
+.top-bar-link {
+    cursor: pointer;
+    font-size: 18px; 
+    margin: 0 15px; 
+    transition: color 0.3s ease; 
+}
+
+.top-bar-link:hover {
+    color: #0056b3; 
+}
+
+.profile-container {
+    margin-left: auto; 
 }
 
 .profile-pic {
     border-radius: 50%;
-    width: 70px; 
-    height: 70px; 
+    width: 70px;
+    height: 70px;
 }
 
 .content {
-    margin-top: 50px;
+    margin-top: 120px;
     display: flex;
     flex-direction: column;
 }
@@ -93,6 +123,11 @@
     padding: 10px;
     margin: 0 10px;
     font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+    background-color: #ccc; /* Darker shade on hover */
 }
 
 .scroll-button.left {

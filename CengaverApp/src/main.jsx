@@ -1,13 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import LoginSignup from './login-signup/loginSignup.jsx'
-import Dashboard from './Dashboard/dashboard.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App'; // Import the App component
+import { BrowserRouter } from 'react-router-dom';
 
-
+const API_BASE_URL = 'https://localhost:7266';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+
+export default API_BASE_URL;

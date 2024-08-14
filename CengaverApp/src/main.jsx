@@ -5,7 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 const API_BASE_URL = 'https://localhost:7266';
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
   <StrictMode>
     <BrowserRouter>
       <App />

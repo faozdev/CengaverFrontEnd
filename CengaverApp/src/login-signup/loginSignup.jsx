@@ -49,7 +49,7 @@ const LoginSignup = ({ setUser, setLogged }) => {
     
           const usersData = await usersResponse.json();
 
-          if (usersResponse.ok && !usersData.isSuccess) {
+          if (usersResponse.ok) {
             const user = usersData.data.find(user => user.userName === email);
             if (user) {
               localStorage.setItem('userId', user.id);

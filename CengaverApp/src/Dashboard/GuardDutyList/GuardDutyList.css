@@ -1,0 +1,10 @@
+.table th, .table td {
+    text-align: center;
+  }
+  .table th {
+    background-color: #f8f9fa;
+  }
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  

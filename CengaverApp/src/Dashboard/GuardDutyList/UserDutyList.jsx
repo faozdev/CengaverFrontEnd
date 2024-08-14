@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import TopBar from '../../Dashboard/TopBar';
+import TopBar from '../../Dashboard/TopBar'; // If needed
 import API_BASE_URL from '../../main'; 
 import './GuardDutyList.css';
 
-const GuardDutiesPage = () => {
+const UserDutyList = () => {
   const [guardDuties, setGuardDuties] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchGuardDuties = async () => {
+      const wardenUserId = localStorage.getItem('userId'); // Fetch the wardenUserId from localStorage
+      if (!wardenUserId) {
+        setError('Warden User ID is missing');
+        return;
+      }
+
       try {
-        const response = await fetch(`${API_BASE_URL}/api/GuardDuties/get-guard-duties`);
+        const response = await fetch(`${API_BASE_URL}/api/GuardDuties/get-guard-duties-by-warden/${wardenUserId}`);
         const data = await response.json();
 
         if (data && Array.isArray(data)) {
@@ -32,7 +38,7 @@ const GuardDutiesPage = () => {
       <TopBar user={{}} handleLogout={() => {}} /> {/* Include TopBar; replace with actual user data and logout handler */}
 
       <div className="container mt-5">
-        {error && <div>{error}</div>}
+        {error && <div className="alert alert-danger">{error}</div>}
         
         <h2>Guard Duties</h2>
         <table className="table">
@@ -64,4 +70,4 @@ const GuardDutiesPage = () => {
   );
 };
 
-export default GuardDutiesPage;
+export default UserDutyList;

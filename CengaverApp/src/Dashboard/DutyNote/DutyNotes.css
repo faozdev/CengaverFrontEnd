@@ -1,0 +1,81 @@
+/* DutyNotes.css */
+
+/* Basic container styling */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styling */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Note Add section styling */
+.Note-Add {
+    margin-bottom: 20px;
+}
+
+/* Note Type dropdown and textarea styling */
+.Note-Add label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.Note-Add select, .Note-Add textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.Note-Add textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Note Listed section styling */
+.Note-Listed {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Note-Listed div {
+    width: 48%;
+}
+
+.Note-Listed h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* List styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+li button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+li button:hover {
+    background-color: #0056b3;
+}

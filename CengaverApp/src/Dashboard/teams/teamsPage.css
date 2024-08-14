@@ -1,0 +1,14 @@
+.team-item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .team-item:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+  }
+  
+  .selected-team {
+    background-color: #d1e7dd; /* Highlight selected team */
+    font-weight: bold;
+  }
+  

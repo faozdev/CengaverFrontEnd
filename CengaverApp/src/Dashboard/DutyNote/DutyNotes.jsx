@@ -1,113 +1,90 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TopBar from '../../Dashboard/TopBar';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import './DutyNotes.css';
 
 const GuardDutyNotes = () => {
     const [guardDuties, setGuardDuties] = useState([]);
+    const [selectedDutyId, setSelectedDutyId] = useState(null);
     const [noteContent, setNoteContent] = useState('');
-    const [noteTypeId, setNoteTypeId] = useState(1); // Default to Text
-    const [noteTypes, setNoteTypes] = useState([
-        { id: 1, name: 'Text' },
-        { id: 2, name: 'Resim' },
-        { id: 3, name: 'URL' },
-        { id: 4, name: 'File' },
-    ]);
-    const [addedNotes, setAddedNotes] = useState([]);
-    const [pendingNotes, setPendingNotes] = useState([]);
+    const [noteTypeId, setNoteTypeId] = useState(0); 
+
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-        const fetchGuardDuties = async () => {
-            const wardenUserId = localStorage.getItem('userId');
-            if (wardenUserId) {
-                try {
-                    const response = await axios.get(`https://localhost:7266/api/GuardDuties/get-guard-duties-by-warden/${wardenUserId}`);
+        if (userId) {
+            axios.get(`https://localhost:7266/api/GuardDuties/get-guard-duties-by-warden/${userId}`)
+                .then(response => {
                     setGuardDuties(response.data);
-                    setPendingNotes(response.data.map(duty => ({
-                        id: duty.id,
-                        isAdded: false,
-                    })));
-                } catch (error) {
+                })
+                .catch(error => {
                     console.error('Error fetching guard duties:', error);
-                }
-            }
-        };
-        fetchGuardDuties();
-    }, []);
+                    toast.error('Error fetching guard duties.');
+                });
+        }
+    }, [userId]);
 
-    const handleAddNote = async (guardDutyId) => {
-        const newNote = {
-            id: 0,
-            guardDutyId: guardDutyId,
-            noteTypeId: noteTypeId,
-            createdDate: new Date().toISOString(),
-            content: noteContent,
-            isDeleted: false,
-        };
+    const handleNoteSubmit = (e) => {
+        e.preventDefault();
 
-        try {
-            await axios.post('https://localhost:7266/api/GuardDutyNotes/add-guard-duty-note', newNote);
-            setAddedNotes(prev => [...prev, guardDutyId]);
-            setPendingNotes(prev => prev.map(note =>
-                note.id === guardDutyId ? { ...note, isAdded: true } : note
-            ));
-            alert('Note added successfully');
-        } catch (error) {
-            console.error('Error adding note:', error);
+        if (selectedDutyId) {
+            const newNote = {
+                id: 0,
+                guardDutyId: selectedDutyId,
+                noteTypeId: 1,
+                createdDate: new Date().toISOString(),
+                content: noteContent,
+                isDeleted: false
+            };
+
+            axios.post('https://localhost:7266/api/GuardDutyNotes/add-guard-duty-note', newNote)
+                .then(response => {
+                    console.log('Not başarıyla eklendi!:', response.data);
+                    toast.success('Not başarıyla eklendi!');
+                    setNoteContent(''); 
+                })
+                .catch(error => {
+                    console.error('Hata!: ', error);
+                    toast.error('Hata!: ');
+                });
         }
     };
 
     return (
-        <div>
+        <div className="container">
             <TopBar user={{}} handleLogout={() => {}} /> {/* Adjust as needed */}
-            <div className="container">
-                <div className='Note-Add'>
-                    <h1>Guard Duty Notes</h1>
-                    <div>
-                        <label>
-                            Note Type:
-                            <select value={noteTypeId} onChange={(e) => setNoteTypeId(parseInt(e.target.value))}>
-                                {noteTypes.map(type => (
-                                    <option key={type.id} value={type.id}>
-                                        {type.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
+
+            <div className="content">
+                <div className="guard-duties-list">
+                    {guardDuties.map(duty => (
+                        <div key={duty.id} className="guard-duty">
+                            <p>Başlangıç Tarihi: {new Date(duty.startDate).toLocaleDateString()}</p>
+                            <p>Bitiş Tarihi: {new Date(duty.endDate).toLocaleDateString()}</p>
+                            <button className="add-note-button" onClick={() => setSelectedDutyId(duty.id)}>Not Ekle</button>
+                        </div>
+                    ))}
+                </div>
+
+                {selectedDutyId && (
+                    <form onSubmit={handleNoteSubmit} className="note-form">
+                        <h2>Not</h2>
                         <textarea
                             value={noteContent}
                             onChange={(e) => setNoteContent(e.target.value)}
-                            placeholder="Enter note content"
+                            placeholder="Notunuzu buraya yazınız..."
+                            required
                         />
-                    </div>
-                </div>
-                <div className='Note-Listed'>
-                    <div>
-                        <h2>Not Bekleyenler</h2>
-                        <ul>
-                            {pendingNotes.filter(note => !note.isAdded).map(duty => (
-                                <li key={duty.id}>
-                                    <strong>Guard Duty ID:</strong> {duty.id}
-                                    <button onClick={() => handleAddNote(duty.id)}>Add Note</button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div>
-                        <h2>Not Eklenenler</h2>
-                        <ul>
-                            {addedNotes.map(id => (
-                                <li key={id}>
-                                    <strong>Guard Duty ID:</strong> {id}
-                                    {/* Optionally, add additional info about the note here */}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+                        <button type="submit">Gönder</button>
+                    </form>
+                )}
             </div>
+
+            <ToastContainer /> {/* Add ToastContainer to render notifications */}
         </div>
     );
 };
 
 export default GuardDutyNotes;
+    

@@ -1,0 +1,67 @@
+/* General styling for the page */
+h1 {
+    font-size: 20px; /* Reduced font size */
+    color: #333;
+    margin-bottom: 15px; /* Reduced margin */
+  }
+  
+  .assignDuty {
+    max-width: 500px; /* Reduced width */
+    margin: 100px auto; /* Adjusted margin-top */
+    padding: 15px; /* Reduced padding */
+  }
+  
+  /* Form container styling */
+  form {
+    max-width: 500px; /* Reduced width */
+    margin: 0 auto;
+    padding: 15px; /* Reduced padding */
+  }
+  
+  /* Styling for form labels */
+  label {
+    display: block;
+    margin-bottom: 8px; /* Reduced margin */
+    font-size: 14px; /* Reduced font size */
+    color: #333;
+  }
+  
+  /* Styling for form inputs */
+  input[type="datetime-local"],
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    margin-top: 4px; /* Reduced margin */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for the submit button */
+  button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for select elements */
+  select {
+    height: 35px; /* Reduced height */
+  }
+  
+  /* Optional: Add some margin between form fields */
+  label + input,
+  label + select {
+    margin-bottom: 10px; /* Reduced margin */
+  }
+  

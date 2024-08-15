@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import userImage from '../assets/user-icon.png';
+import Logo from '../assets/KocSistem.png';
+import './topBar.css';
 
 const TopBar = ({ user, handleLogout }) => {
   const [showPanel, setShowPanel] = useState(false);
@@ -14,6 +16,8 @@ const TopBar = ({ user, handleLogout }) => {
   const handleDashboardClick = () => navigate('/dashboard'); // Navigate to dashboard
   const handleUserDutyListClick = () => navigate('/dashboard/user-duty-list'); // Adjust the path as needed
   const handleDutyNoteClick = () => navigate('/dashboard/duty-note'); // Adjust the path as needed
+  const handleGuardBreak = () => navigate('/dashboard/duty-break'); // Adjust the path as needed
+  const handleTeamDutyListClick = () => navigate('/dashboard/team-duty-list'); // Adjust the path as needed
   console.log('userIsPermitted:', user.isPermitted);
 
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
@@ -24,11 +28,15 @@ const TopBar = ({ user, handleLogout }) => {
     navigate('/');
   };
   return (
-    <div className="fixed-top top-bar d-flex align-items-center bg-light p-3 border-bottom">
+    <div className="fixed-top top-bar d-flex align-items-center bg-light p-3 border-bottom "style={{ marginBottom: '20px' }}>
       <div className="d-flex align-items-center flex-grow-1">
-        <h1 className="dashboard-title" onClick={handleDashboardClick}>
-          Dashboard
-        </h1>
+      <img 
+          src={Logo} 
+          alt="Logo" 
+          className="logo" 
+          onClick={handleDashboardClick} 
+          style={{ cursor: 'pointer' }} 
+        />
       </div>
       <div className="top-bar-links d-flex ms-4">
         {user.isPermitted === 'admin' ? (
@@ -40,8 +48,10 @@ const TopBar = ({ user, handleLogout }) => {
           </>
         ) : (
           <>
-            <span className="top-bar-link" onClick={handleUserDutyListClick}>Nöbet Listesi</span>
+            <span className="top-bar-link" onClick={handleUserDutyListClick}>Nöbet Listem</span>
+            <span className="top-bar-link" onClick={handleTeamDutyListClick}>Takımın Nöbetleri</span>
             <span className="top-bar-link" onClick={handleDutyNoteClick}>Nöbet Notu</span>
+            <span className="top-bar-link" onClick={handleGuardBreak}>İzin Alma</span>
           </>
         )}
       </div>

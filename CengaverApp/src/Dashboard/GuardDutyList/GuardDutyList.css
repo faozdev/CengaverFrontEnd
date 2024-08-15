@@ -1,10 +1,30 @@
-.table th, .table td {
-    text-align: center;
-  }
-  .table th {
-    background-color: #f8f9fa;
-  }
-  .table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
+/* Ensure the container has enough margin from the top */
+.container {
+  padding: 20px;
+  margin-top: 100px; /* Adjust this value based on the height of your TopBar */
+}
+
+/* Styling for the table */
+.table {
+  font-size: 1rem; /* Adjust font size as needed */
+  margin-top: 20px; /* Space between the heading and the table */
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Adjust padding for better readability */
+}
+
+.table thead th {
+  background-color: #f1f1f1; /* Header background color */
+}
+
+/* Header styling */
+h2 {
+  font-size: 1.5rem; /* Increase header font size */
+  margin-bottom: 20px; /* Space below the header */
+}
+.remove-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+}

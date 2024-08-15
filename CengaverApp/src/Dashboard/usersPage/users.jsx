@@ -89,7 +89,6 @@ const UserPage = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>İsim</th>
                 <th>Email</th>
                 <th>Sicil No</th>
@@ -99,7 +98,6 @@ const UserPage = () => {
             <tbody>
               {users.map((user, index) => (
                 <tr key={index}>
-                  <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.userName}</td>
                   <td>{user.sicilNo}</td>

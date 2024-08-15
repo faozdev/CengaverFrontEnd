@@ -1,207 +1,37 @@
-.dashboard {
-    font-family: Arial, sans-serif;
+.user-calendar-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* 2 columns for user-card and 1 column each for calendar-container and selected-user-container */
+  gap: 20px; /* Adjust spacing between sections */
+  padding: 0 200px; /* Add padding on the left and right */
 }
 
-.profile-container {
-    position: relative;
-    margin-left: auto;
+.user-card {
+  grid-column: 1 / 2; /* Takes up the first column */
 }
 
-.dropdown-menu {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    z-index: 1000;
-    display: block; 
-}
-  .dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    background-color: transparent;
-    border: 0;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f8f9fa;
-  }
-
-.card {
-    border: 1px solid #ddd;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    min-width: 300px;
-    min-height: 300px;
+.calendar-container {
+  grid-column: 2 / 3; /* Takes up the second column */
 }
 
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 200px; 
+.selected-user-container {
+  grid-column: 3 / 4; /* Takes up the third column */
 }
 
-.team-cards {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 1rem;
-    padding: 0 1rem;
-    min-height: 200px;
-    scroll-behavior: smooth; 
-  }
-  
-  .team-card {
-    flex: 0 0 auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    min-width: 200px;
-    min-height: 250px;
-    text-align: center;
-    font-size: 18px;
-  }
-  
-  .team-card h5 {
-    margin: 0 0 10px;
-    font-size: 1rem;
-  }
-.card-body h5,
-.card-body ul {
-    width: 100%;
-    text-align: center;
+/* Optional: Adjust card and container styling */
+.user-card, .calendar-container {
+  padding: 10px; /* Add some padding */
+  background: #f9f9f9; /* Light background color for better visibility */
+  border: 1px solid #ddd; /* Border around sections */
 }
-
-.card-body ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+.selected-user-container{
+  padding: 10px; /* Add some padding */
 }
-
-.card-body li {
-    display: block;
-    padding: 10px;
+.calendar-guard-duty {
+  padding: 10px; /* Add some padding */
+  background: #f9f9f9; /* Light background color for better visibility */
+  border: 1px solid #ddd; /* Border around sections */
+  text-align: center;
 }
-
-.top-bar {
-    display: flex;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 100px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.dashboard-title {
-    margin: 0;
-    font-size: 24px;
-}
-
-.top-bar-links {
-    display: flex;
-    align-items: center;
-}
-
-.top-bar-link {
-    cursor: pointer;
-    font-size: 18px;
-    margin: 0 15px;
-    transition: color 0.3s ease;
-}
-
-.top-bar-link:hover {
-    color: #0056b3;
-}
-
-.profile-container {
-    margin-left: auto;
-}
-
-.profile-pic {
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-  }
-
-.content {
-    margin-top: 120px;
-    display: flex;
-    flex-direction: column;
-}
-
-.cards {
-    margin-top: 50px;
-}
-
-.user-and-teams {
-    display: flex;
-    gap: 50px;
-}
-
-.team-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    overflow: hidden;
-}
-
-.scroll-button {
-    background-color: #ddd;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px;
-    margin: 0 10px;
-    font-size: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.scroll-button:hover {
-    background-color: #ccc;
-}
-
-.scroll-button.left {
-    margin-left: 0;
-}
-
-.scroll-button.right {
-    margin-right: 0;
-}
-
-.guard-duties {
-    margin-top: 50px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-    font-size: 16px;
-}
-
-th {
-    background-color: #f4f4f4;
+.user-card-body {
+  margin: 0;
 }

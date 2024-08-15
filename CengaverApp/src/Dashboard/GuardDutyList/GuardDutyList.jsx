@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import TopBar from '../../Dashboard/TopBar';
 import API_BASE_URL from '../../main'; 
 import './GuardDutyList.css';
+import removeIcon from '../../assets/remove.png';
 
 const GuardDutiesPage = () => {
   const [guardDuties, setGuardDuties] = useState([]);
+  const [userNames, setUserNames] = useState({});
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -15,6 +17,22 @@ const GuardDutiesPage = () => {
 
         if (data && Array.isArray(data)) {
           setGuardDuties(data);
+          // Fetch names for each wardenUserId
+          const userIds = [...new Set(data.map(duty => duty.wardenUserId))];
+          const nameRequests = userIds.map(id =>
+            fetch(`${API_BASE_URL}/api/Users/get-username/${id}`)
+              .then(response => response.json())
+              .then(data => ({
+                id,
+                name: data.data
+              }))
+          );
+          const nameResults = await Promise.all(nameRequests);
+          const nameMap = nameResults.reduce((map, { id, name }) => {
+            map[id] = name;
+            return map;
+          }, {});
+          setUserNames(nameMap);
         } else {
           setError('Guard duties verisi hatalı');
         }
@@ -27,6 +45,23 @@ const GuardDutiesPage = () => {
     fetchGuardDuties();
   }, []);
 
+  const handleRemove = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/GuardDuties/delete-guard-duty/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setGuardDuties((prevDuties) => prevDuties.filter((duty) => duty.id !== id));
+      } else {
+        setError('Failed to delete guard duty.');
+      }
+    } catch (error) {
+      console.error('Error deleting guard duty:', error);
+      setError('An error occurred while deleting guard duty.');
+    }
+  };
+
   return (
     <div>
       <TopBar user={{}} handleLogout={() => {}} /> {/* Include TopBar; replace with actual user data and logout handler */}
@@ -34,27 +69,35 @@ const GuardDutiesPage = () => {
       <div className="container mt-5">
         {error && <div>{error}</div>}
         
-        <h2>Guard Duties</h2>
+        <h2>Nöbet Tablosu</h2>
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Warden User ID</th>
-              <th>Date of Assignment</th>
-              <th>Guard Assigned By</th>
+              <th>Başlama Tarihi</th>
+              <th>Bitiş Tarihi</th>
+              <th>İsim Soyisim</th> {/* Updated header */}
+              <th>Atama Tarihi</th>
+              <th>Atayan Kişi</th>
+               {/* Add Actions header */}
             </tr>
           </thead>
           <tbody>
             {guardDuties.map((duty) => (
               <tr key={duty.id}>
-                <td>{duty.id}</td>
                 <td>{new Date(duty.startDate).toLocaleDateString()}</td>
                 <td>{new Date(duty.endDate).toLocaleDateString()}</td>
-                <td>{duty.wardenUserId}</td>
+                <td>{userNames[duty.wardenUserId] || 'Loading...'}</td> {/* Display name */}
                 <td>{new Date(duty.dateOfAssignment).toLocaleDateString()}</td>
                 <td>{duty.guardAssignedByUser}</td>
+                <td>
+                  <img
+                    src={removeIcon}
+                    alt="Remove"
+                    className="remove-icon"
+                    onClick={() => handleRemove(duty.id)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </td> {/* Add Remove icon */}
               </tr>
             ))}
           </tbody>

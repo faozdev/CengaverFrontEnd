@@ -9,9 +9,9 @@ const UserDutyList = () => {
 
   useEffect(() => {
     const fetchGuardDuties = async () => {
-      const wardenUserId = localStorage.getItem('userId'); // Fetch the wardenUserId from localStorage
+      const wardenUserId = localStorage.getItem('userId'); 
       if (!wardenUserId) {
-        setError('Warden User ID is missing');
+        setError('Hata');
         return;
       }
 
@@ -22,7 +22,7 @@ const UserDutyList = () => {
         if (data && Array.isArray(data)) {
           setGuardDuties(data);
         } else {
-          setError('Guard duties verisi hatalı');
+          setError('Nöbetçi verisi hatalı');
         }
       } catch (error) {
         console.error('Error fetching guard duties:', error);
@@ -40,16 +40,15 @@ const UserDutyList = () => {
       <div className="container mt-5">
         {error && <div className="alert alert-danger">{error}</div>}
         
-        <h2>Guard Duties</h2>
+        <h2>Nöbetlerim</h2>
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Warden User ID</th>
-              <th>Date of Assignment</th>
-              <th>Guard Assigned By</th>
+              <th>Nöbet Numarası</th>
+              <th>Başlangıç Tarihi</th>
+              <th>Bitiş Tarihi</th>
+              <th>Nöbet Verilme Tarihi</th>
+              <th>Nöbeti Tanımlayan Kişi</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +57,6 @@ const UserDutyList = () => {
                 <td>{duty.id}</td>
                 <td>{new Date(duty.startDate).toLocaleDateString()}</td>
                 <td>{new Date(duty.endDate).toLocaleDateString()}</td>
-                <td>{duty.wardenUserId}</td>
                 <td>{new Date(duty.dateOfAssignment).toLocaleDateString()}</td>
                 <td>{duty.guardAssignedByUser}</td>
               </tr>

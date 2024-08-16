@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import userImage from '../assets/user-icon.png';
-import Logo from '../assets/KocSistem.png';
+import Logo from '../assets/Cengaver.png';
 import './topBar.css';
 
 const TopBar = ({ user, handleLogout }) => {
@@ -35,7 +35,7 @@ const TopBar = ({ user, handleLogout }) => {
           alt="Logo" 
           className="logo" 
           onClick={handleDashboardClick} 
-          style={{ cursor: 'pointer' }} 
+          style={{ cursor: 'pointer' , width: '180px', height: '50px'}} 
         />
       </div>
       <div className="top-bar-links d-flex ms-4">

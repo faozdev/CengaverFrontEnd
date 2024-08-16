@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDutyUser, setSelectedDutyUser] = useState(null);
   const [selectedDutyColor, setSelectedDutyColor] = useState(null);
+  const [dutyNotes, setDutyNotes] = useState([]);
 
   const teamCardsRef = useRef(null);
   const navigate = useNavigate(); 
@@ -141,7 +142,6 @@ const Dashboard = () => {
   const handleGuardBreak = () => {
     navigate('/dashboard/duty-break'); 
   };
-
   const handleGuardDutyAssignmentClick = () => {
     navigate('/dashboard/guard-duty-assignment'); 
   };
@@ -187,9 +187,11 @@ const Dashboard = () => {
   
     if (duty) {
       await fetchUserName(duty.wardenUserId);
+      fetchGuardDutyNotes(duty.id);
     } else {
       setSelectedDutyUser(null);
       setSelectedDutyColor(null);
+      setDutyNotes([]);
     }
   };
   
@@ -209,13 +211,24 @@ const Dashboard = () => {
     }
   };
 
+  const fetchGuardDutyNotes = async (guardDutyId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/GuardDutyNotes/get-guard-duty-notes-by-guard-duty/${guardDutyId}`);
+      const notesData = await response.json();
+      setDutyNotes(notesData.length > 0 ? notesData : [{ content: '--' }]);
+    } catch (error) {
+      console.error('Error fetching guard duty notes:', error);
+      setDutyNotes([{ content: '--' }]);
+    }
+  };
+
   const formatDate = (date) => {
     return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
   return (
     <div>
-      <TopBar user={{}} handleLogout={() => {}} /> {/* Adjust as needed */}
+      <TopBar user={{}} handleLogout={() => {}} /> 
       <div className="user-calendar-container">
         <div className="user-card">
           <div className="user-card-body">
@@ -223,7 +236,7 @@ const Dashboard = () => {
             <p className="user-card-text">Ad: {user.name}</p>
             <p className="user-card-text">Rol: {user.role}</p>
             <h1 className="user-card-title">Takımlarım: </h1>
-            <TeamsList teams={teams} /> {/* Render TeamsList here */}
+            <TeamsList teams={teams} /> 
           </div>
         </div>
         <Calendar
@@ -237,7 +250,12 @@ const Dashboard = () => {
             <div>
               <p>Tarih: {formatDate(selectedDate)}</p>
               <p>Nöbetçi: {selectedDutyUser}</p>
-              <div style={{ backgroundColor: selectedDutyColor, height: '10px', width: '10px', borderRadius: '50%' }} />
+              <div className="duty-notes">
+              <p>Nöbet Notu:</p>
+                {dutyNotes.map((note, index) => (
+                  <li key={index}>{note.content}</li>
+                ))}
+            </div>
             </div>
           )}
         </div>

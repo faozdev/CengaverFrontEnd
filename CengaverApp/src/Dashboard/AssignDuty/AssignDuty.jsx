@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AssignDuty.css';
+import API_BASE_URL from '../../main';
 
 const GuardDutyAssignmentPage = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const GuardDutyAssignmentPage = () => {
       const userId = localStorage.getItem('userId');
       if (userId) {
         try {
-          const response = await axios.get(`https://localhost:7266/api/Users/get-user/${userId}`);
+          const response = await axios.get(`${API_BASE_URL}/api/Users/get-user/${userId}`);
           if (response.data.isSuccess) {
             const userName = response.data.data.name;
             setFormData(prevFormData => ({
@@ -40,18 +41,16 @@ const GuardDutyAssignmentPage = () => {
 
     fetchUserName();
 
-    // Set the current date and time for dateOfAssignment
     const now = new Date();
-    const formattedDate = now.toISOString().slice(0, 16); // Format to 'YYYY-MM-DDTHH:MM'
+    const formattedDate = now.toISOString().slice(0, 16);
     setFormData(prevFormData => ({
       ...prevFormData,
       dateOfAssignment: formattedDate
     }));
-    
-    // Fetch teams
+
     const fetchTeams = async () => {
       try {
-        const response = await axios.get('https://localhost:7266/api/Teams/get-teams');
+        const response = await axios.get(`${API_BASE_URL}/api/Teams/get-teams`);
         if (response.data) {
           setTeams(response.data);
         }
@@ -64,14 +63,13 @@ const GuardDutyAssignmentPage = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch team users when a team is selected
     const fetchTeamUsers = async () => {
       if (selectedTeamId) {
         try {
-          const response = await axios.get(`https://localhost:7266/api/UserTeams/get-users-by-team/${selectedTeamId}`);
+          const response = await axios.get(`${API_BASE_URL}/api/UserTeams/get-users-by-team/${selectedTeamId}`);
           if (response.data) {
             const usersWithNames = await Promise.all(response.data.map(async (user) => {
-              const userResponse = await axios.get(`https://localhost:7266/api/Users/get-username/${user.userId}`);
+              const userResponse = await axios.get(`${API_BASE_URL}/api/Users/get-username/${user.userId}`);
               return {
                 userId: user.userId,
                 userName: userResponse.data.data,
@@ -103,7 +101,7 @@ const GuardDutyAssignmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://localhost:7266/api/GuardDuties/add-guard-duty', formData);
+      await axios.post('${API_BASE_URL}/api/GuardDuties/add-guard-duty', formData);
       alert('Nöbet başarıyla atandı!');
     } catch (error) {
       alert('Bir hata oluştu: ' + error.message);
@@ -112,7 +110,7 @@ const GuardDutyAssignmentPage = () => {
 
   return (
     <div>
-      <TopBar user={{}} handleLogout={() => {}} /> {/* Adjust as needed */}
+      <TopBar user={{}} handleLogout={() => {}} /> 
         <div className="assignDuty">
       <h1>Nöbet Atama Sayfası</h1>
       <form onSubmit={handleSubmit}>

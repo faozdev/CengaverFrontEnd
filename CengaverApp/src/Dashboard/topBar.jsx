@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { useNavigate } from 'react-router-dom'; 
 import userImage from '../assets/user-icon.png';
 import Logo from '../assets/Cengaver.png';
 import './topBar.css';
@@ -8,16 +8,15 @@ const TopBar = ({ user, handleLogout }) => {
   const [showPanel, setShowPanel] = useState(false);
   const navigate = useNavigate();
 
-  // Navigation handlers
-  const handleUsersClick = () => navigate('/dashboard/users'); // Adjust the path as needed
-  const handleTeamsClick = () => navigate('/dashboard/teams'); // Adjust the path as needed
-  const handleDutyListClick = () => navigate('/dashboard/duty-list'); // Adjust the path as needed
-  const handleDutyAssignmentClick = () => navigate('/dashboard/guard-duty-assignment'); // Adjust the path as needed
-  const handleDashboardClick = () => navigate('/dashboard'); // Navigate to dashboard
-  const handleUserDutyListClick = () => navigate('/dashboard/user-duty-list'); // Adjust the path as needed
-  const handleDutyNoteClick = () => navigate('/dashboard/duty-note'); // Adjust the path as needed
-  const handleGuardBreak = () => navigate('/dashboard/duty-break'); // Adjust the path as needed
-  const handleTeamDutyListClick = () => navigate('/dashboard/team-duty-list'); // Adjust the path as needed
+  const handleUsersClick = () => navigate('/dashboard/users');
+  const handleTeamsClick = () => navigate('/dashboard/teams');
+  const handleDutyListClick = () => navigate('/dashboard/duty-list'); 
+  const handleDutyAssignmentClick = () => navigate('/dashboard/guard-duty-assignment'); 
+  const handleDashboardClick = () => navigate('/dashboard'); 
+  const handleUserDutyListClick = () => navigate('/dashboard/user-duty-list'); 
+  const handleDutyNoteClick = () => navigate('/dashboard/duty-note'); 
+  const handleGuardBreak = () => navigate('/dashboard/duty-break'); 
+  const handleTeamDutyListClick = () => navigate('/dashboard/team-duty-list'); 
   console.log('userIsPermitted:', user.isPermitted);
 
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
@@ -60,7 +59,7 @@ const TopBar = ({ user, handleLogout }) => {
           src={userImage} 
           alt="Profile" 
           className="profile-pic rounded-circle"  
-          onClick={() => setShowPanel(prev => !prev)} // Toggle the panel visibility
+          onClick={() => setShowPanel(prev => !prev)} 
         />
         {showPanel && (
           <div className="dropdown-menu">

@@ -15,8 +15,8 @@
     margin-top: 10px;
     padding: 10px;
     font-size: 16px;
-    display: block; /* Ensures that the select element is a block-level element */
-    margin-bottom: 20px; /* Adds spacing below the select element */
+    display: block; 
+    margin-bottom: 20px; 
   }
   
   .team-duty-list .error {

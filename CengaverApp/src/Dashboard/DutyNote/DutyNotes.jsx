@@ -4,6 +4,7 @@ import TopBar from '../../Dashboard/TopBar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import './DutyNotes.css';
+import API_BASE_URL from '../../main';
 
 const GuardDutyNotes = () => {
     const [guardDuties, setGuardDuties] = useState([]);
@@ -15,7 +16,7 @@ const GuardDutyNotes = () => {
 
     useEffect(() => {
         if (userId) {
-            axios.get(`https://localhost:7266/api/GuardDuties/get-guard-duties-by-warden/${userId}`)
+            axios.get(`${API_BASE_URL}/api/GuardDuties/get-guard-duties-by-warden/${userId}`)
                 .then(response => {
                     setGuardDuties(response.data);
                 })
@@ -39,7 +40,7 @@ const GuardDutyNotes = () => {
                 isDeleted: false
             };
 
-            axios.post('https://localhost:7266/api/GuardDutyNotes/add-guard-duty-note', newNote)
+            axios.post('${API_BASE_URL}/api/GuardDutyNotes/add-guard-duty-note', newNote)
                 .then(response => {
                     console.log('Not başarıyla eklendi!:', response.data);
                     toast.success('Not başarıyla eklendi!');
@@ -54,8 +55,7 @@ const GuardDutyNotes = () => {
 
     return (
         <div className="container">
-            <TopBar user={{}} handleLogout={() => {}} /> {/* Adjust as needed */}
-
+            <TopBar user={{}} handleLogout={() => {}} />
             <div className="content">
                 <div className="guard-duties-list">
                     {guardDuties.map(duty => (
@@ -81,7 +81,7 @@ const GuardDutyNotes = () => {
                 )}
             </div>
 
-            <ToastContainer /> {/* Add ToastContainer to render notifications */}
+            <ToastContainer /> 
         </div>
     );
 };

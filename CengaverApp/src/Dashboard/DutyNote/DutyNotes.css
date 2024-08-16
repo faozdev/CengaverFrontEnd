@@ -1,92 +1,84 @@
-/* DutyNotes.css */
-
-/* Container styling */
 .container {
     padding: 20px;
 }
 
-/* Flexbox container for guard duties and form */
 .content {
     display: flex;
     justify-content: space-between;
-    gap: 30px; /* Increased gap between sections */
+    gap: 30px; 
 }
 
-/* Styling for the list of guard duties */
 .guard-duties-list {
-    flex: 2; /* Increased flex to make this section larger */
-    max-width: 700px; /* Increased max-width for the list */
+    flex: 2; 
+    max-width: 700px; 
 }
 
-/* Individual guard duty styling */
 .guard-duty {
     border: 1px solid #ddd;
-    border-radius: 8px; /* Slightly larger border-radius */
-    padding: 15px; /* Increased padding */
-    margin-bottom: 15px; /* Increased margin between items */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px; 
     background-color: #f9f9f9;
 }
 
-/* Styling for the form to add notes */
 .note-form {
-    flex: 1; /* Adjusted flex to balance the size with the list */
+    flex: 1; 
     border: 1px solid #ddd;
-    border-radius: 8px; /* Slightly larger border-radius */
-    padding: 25px; /* Increased padding */
+    border-radius: 8px; 
+    padding: 25px; 
     background-color: #f9f9f9;
-    max-width: 600px; /* Increased max-width for the form */
+    max-width: 600px; 
 }
 
 .note-form h2 {
-    margin-bottom: 15px; /* Increased margin */
-    font-size: 1.5em; /* Larger font size for heading */
+    margin-bottom: 15px; 
+    font-size: 1.5em; 
 }
 
 .note-form textarea {
     width: 100%;
-    height: 150px; /* Increased height */
-    padding: 15px; /* Increased padding */
+    height: 150px; 
+    padding: 15px; 
     border: 1px solid #ddd;
-    border-radius: 8px; /* Slightly larger border-radius */
+    border-radius: 8px; 
     resize: vertical;
-    margin-bottom: 15px; /* Increased margin below textarea */
+    margin-bottom: 15px; 
 }
 
 .note-form button {
-    padding: 15px 25px; /* Increased padding */
+    padding: 15px 25px; 
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 8px; /* Slightly larger border-radius */
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1em; /* Larger font size for button text */
-    min-width: 300px; /* Increased min-width */
+    font-size: 1em; 
+    min-width: 300px; 
 }
 
 .note-form button:hover {
     background-color: #0056b3;
 }
-/* DutyNotes.css */
 
 .add-note-button {
-    background-color: #828282; /* Green background */
-    color: white; /* White text */
-    border: none; /* Remove borders */
-    padding: 10px 20px; /* Add some padding */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Display as inline-block */
-    font-size: 16px; /* Font size */
-    margin: 4px 2px; /* Margin around button */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth background color transition */
+    background-color: #828282; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
 }
 
 .add-note-button:hover {
-    background-color: #333333; /* Darker green on hover */
+    background-color: #333333; 
 }
 
 .add-note-button:focus {
-    outline: none; /* Remove default focus outline */
+    outline: none; 
 }

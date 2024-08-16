@@ -3,6 +3,7 @@ import axios from 'axios';
 import TopBar from '../../Dashboard/TopBar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import API_BASE_URL from '../../main';
 
 function GuardDutyBreak() {
     const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ function GuardDutyBreak() {
 
         const fetchBreakTypes = async () => {
             try {
-                const response = await axios.get('https://localhost:7266/api/GuardDutyBreakTypes');
+                const response = await axios.get(`${API_BASE_URL}/api/GuardDutyBreakTypes`);
                 setBreakTypes(response.data);
             } catch (error) {
                 console.error('Error fetching break types:', error);
@@ -52,7 +53,7 @@ function GuardDutyBreak() {
         e.preventDefault();
         handleDateOfClaim();
         try {
-            const response = await axios.post('https://localhost:7266/api/GuardDutyBreaks/add-guard-duty-break', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/GuardDutyBreaks/add-guard-duty-break`, formData);
             console.log('Response:', response.data);
             toast.success('İzin başarıyla alındı.');
         } catch (error) {
@@ -115,7 +116,7 @@ function GuardDutyBreak() {
                     İzin İste
                 </button>
             </form>
-            <ToastContainer /> {/* Add ToastContainer to render notifications */}
+            <ToastContainer /> 
         </div>
     );
 }

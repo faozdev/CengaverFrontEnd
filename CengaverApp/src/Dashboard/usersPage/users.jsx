@@ -5,14 +5,13 @@ import TopBar from '../../Dashboard/TopBar';
 
 const UserPage = () => {
   const [user, setUser] = useState({ name: null, role: null, isPermitted: null });
-  const [users, setUsers] = useState([]); // Initialize as an empty array
+  const [users, setUsers] = useState([]); 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('userId');
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login'); 
   };
 
   useEffect(() => {
@@ -24,20 +23,16 @@ const UserPage = () => {
       }
 
       try {
-        // Fetch user roles
         const userRolesResponse = await fetch(`${API_BASE_URL}/api/UserRoles/get-user-roles-by-user/${userId}`);
         const userRoles = await userRolesResponse.json();
         const role = userRoles.length > 0 ? userRoles[0].role : null;
 
         if (role) {
-          // Fetch permissions for the role
           const permissionsResponse = await fetch(`${API_BASE_URL}/api/Permissions/get-permissions-by-role/${role.id}`);
           const permissions = await permissionsResponse.json();
 
-          // Check if user is admin
           const isAdmin = permissions.some(permission => permission.userPermission === 'admin');
 
-          // Fetch username
           const userNameResponse = await fetch(`${API_BASE_URL}/api/Users/get-username/${userId}`);
           const userNameData = await userNameResponse.json();
           const userName = userNameData.data || 'Unknown';
@@ -49,24 +44,20 @@ const UserPage = () => {
           });
 
           if (!isAdmin) {
-            setError('Yetkili değilsin'); // "You are not authorized" message
+            setError('Yetkili değilsin'); 
             return;
           }
-
-          // Fetch all users if admin
           const usersResponse = await fetch(`${API_BASE_URL}/api/Users/get-users`);
           const usersData = await usersResponse.json();
 
-          // Check if the usersData object contains the data array
           if (usersData && Array.isArray(usersData.data)) {
-            setUsers(usersData.data); // Set the users from the data array
+            setUsers(usersData.data); 
           } else {
             setError('Kullanıcı verisi hatalı');
           }
         } else {
           setError('No role found for user');
         }
-
       } catch (error) {
         console.error('Error fetching user data or permissions:', error);
         setError('An error occurred while fetching data.');

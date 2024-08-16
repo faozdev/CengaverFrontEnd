@@ -1,35 +1,34 @@
 .user-calendar-container {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr; /* 2 columns for user-card and 1 column each for calendar-container and selected-user-container */
-  gap: 20px; /* Adjust spacing between sections */
-  padding: 0 200px; /* Add padding on the left and right */
+  grid-template-columns: 2fr 1fr 1fr; 
+  gap: 20px; 
+  padding: 0 200px; 
 }
 
 .user-card {
-  grid-column: 1 / 2; /* Takes up the first column */
+  grid-column: 1 / 2; 
 }
 
 .calendar-container {
-  grid-column: 2 / 3; /* Takes up the second column */
+  grid-column: 2 / 3; 
 }
 
 .selected-user-container {
-  grid-column: 3 / 4; /* Takes up the third column */
+  grid-column: 3 / 4; 
 }
 
-/* Optional: Adjust card and container styling */
 .user-card, .calendar-container {
-  padding: 10px; /* Add some padding */
-  background: #f9f9f9; /* Light background color for better visibility */
-  border: 1px solid #ddd; /* Border around sections */
+  padding: 10px; 
+  background: #f9f9f9; 
+  border: 1px solid #ddd; 
 }
 .selected-user-container{
-  padding: 10px; /* Add some padding */
+  padding: 10px;
 }
 .calendar-guard-duty {
-  padding: 10px; /* Add some padding */
-  background: #f9f9f9; /* Light background color for better visibility */
-  border: 1px solid #ddd; /* Border around sections */
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd; 
   text-align: center;
 }
 .user-card-body {

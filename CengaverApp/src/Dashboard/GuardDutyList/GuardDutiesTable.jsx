@@ -1,6 +1,5 @@
-// components/GuardDutiesTable.js
 import React, { useEffect, useState } from 'react';
-import API_BASE_URL from '../../main'; // Adjust the import path as necessary
+import API_BASE_URL from '../../main'; 
 
 const GuardDutiesTable = () => {
   const [guardDuties, setGuardDuties] = useState([]);

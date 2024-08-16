@@ -64,8 +64,7 @@ const GuardDutiesPage = () => {
 
   return (
     <div>
-      <TopBar user={{}} handleLogout={() => {}} /> {/* Include TopBar; replace with actual user data and logout handler */}
-
+      <TopBar user={{}} handleLogout={() => {}} /> 
       <div className="container mt-5">
         {error && <div>{error}</div>}
         
@@ -75,10 +74,9 @@ const GuardDutiesPage = () => {
             <tr>
               <th>Başlama Tarihi</th>
               <th>Bitiş Tarihi</th>
-              <th>İsim Soyisim</th> {/* Updated header */}
+              <th>İsim Soyisim</th> 
               <th>Atama Tarihi</th>
               <th>Atayan Kişi</th>
-               {/* Add Actions header */}
             </tr>
           </thead>
           <tbody>
@@ -86,7 +84,7 @@ const GuardDutiesPage = () => {
               <tr key={duty.id}>
                 <td>{new Date(duty.startDate).toLocaleDateString()}</td>
                 <td>{new Date(duty.endDate).toLocaleDateString()}</td>
-                <td>{userNames[duty.wardenUserId] || 'Loading...'}</td> {/* Display name */}
+                <td>{userNames[duty.wardenUserId] || 'Loading...'}</td> 
                 <td>{new Date(duty.dateOfAssignment).toLocaleDateString()}</td>
                 <td>{duty.guardAssignedByUser}</td>
                 <td>
@@ -97,7 +95,7 @@ const GuardDutiesPage = () => {
                     onClick={() => handleRemove(duty.id)}
                     style={{ cursor: 'pointer' }}
                   />
-                </td> {/* Add Remove icon */}
+                </td> 
               </tr>
             ))}
           </tbody>

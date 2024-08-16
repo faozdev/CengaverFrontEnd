@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TopBar from '../../Dashboard/TopBar'; // If needed
+import TopBar from '../../Dashboard/TopBar'; 
 import API_BASE_URL from '../../main'; 
 import './GuardDutyList.css';
 
@@ -35,11 +35,9 @@ const UserDutyList = () => {
 
   return (
     <div>
-      <TopBar user={{}} handleLogout={() => {}} /> {/* Include TopBar; replace with actual user data and logout handler */}
-
+      <TopBar user={{}} handleLogout={() => {}} /> 
       <div className="container mt-5">
         {error && <div className="alert alert-danger">{error}</div>}
-        
         <h2>Nöbetlerim</h2>
         <table className="table">
           <thead>

@@ -1,30 +1,27 @@
-/* Ensure the container has enough margin from the top */
 .container {
   padding: 20px;
-  margin-top: 100px; /* Adjust this value based on the height of your TopBar */
+  margin-top: 100px; 
 }
 
-/* Styling for the table */
 .table {
-  font-size: 1rem; /* Adjust font size as needed */
-  margin-top: 20px; /* Space between the heading and the table */
+  font-size: 1rem; 
+  margin-top: 20px;
 }
 
 .table th,
 .table td {
-  padding: 12px; /* Adjust padding for better readability */
+  padding: 12px; 
 }
 
 .table thead th {
-  background-color: #f1f1f1; /* Header background color */
+  background-color: #f1f1f1; 
 }
 
-/* Header styling */
 h2 {
-  font-size: 1.5rem; /* Increase header font size */
-  margin-bottom: 20px; /* Space below the header */
+  font-size: 1.5rem; 
+  margin-bottom: 20px; 
 }
 .remove-icon {
-  width: 20px; /* Adjust size as needed */
-  height: 20px; /* Adjust size as needed */
+  width: 20px; 
+  height: 20px; 
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API_BASE_URL from '../../main'; 
 import TopBar from '../TopBar';
-import './TeamDutyList.css'; // Import the CSS file
+import './TeamDutyList.css'; 
 
 const TeamDutyList = () => {
   const [guardDuties, setGuardDuties] = useState([]);
@@ -9,37 +9,31 @@ const TeamDutyList = () => {
   const [selectedTeamId, setSelectedTeamId] = useState(null);
   const [error, setError] = useState(null);
 
-  // Fetches the username for a given wardenUserId
   const fetchUsername = async (wardenUserId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/Users/get-username/${wardenUserId}`);
       const data = await response.json();
-      return data.data; // Assuming the username is in the 'data' field
+      return data.data; 
     } catch (err) {
       console.error(`Failed to fetch username for ${wardenUserId}:`, err);
       return 'Unknown';
     }
   };
 
-  // Fetches the guard duties by team ID and includes usernames
   const fetchGuardDutiesByTeam = async (teamId) => {
     try {
-      // Fetch users in the selected team
       const usersResponse = await fetch(`${API_BASE_URL}/api/UserTeams/get-users-by-team/${teamId}`);
       const usersData = await usersResponse.json();
 
       const userIds = usersData.map(user => user.userId);
 
-      // Fetch guard duties for each user
       const guardDutyPromises = userIds.map(id =>
         fetch(`${API_BASE_URL}/api/GuardDuties/get-guard-duties-by-warden/${id}`).then(res => res.json())
       );
       const guardDutiesData = await Promise.all(guardDutyPromises);
 
-      // Flatten the array
       const flattenedDuties = guardDutiesData.flat();
 
-      // Fetch usernames and update guard duties
       const updatedGuardDuties = await Promise.all(flattenedDuties.map(async (duty) => {
         const username = await fetchUsername(duty.wardenUserId);
         return { ...duty, wardenUsername: username };
@@ -52,19 +46,16 @@ const TeamDutyList = () => {
     }
   };
 
-  // Fetches the teams for the current user
   const fetchGuardDuties = async () => {
     try {
       const userId = localStorage.getItem('userId');
       if (!userId) return;
 
-      // Fetch user teams
       const userTeamsResponse = await fetch(`${API_BASE_URL}/api/UserTeams/get-user-teams/${userId}`);
       const userTeamsData = await userTeamsResponse.json();
       
       const teamIds = userTeamsData.map(team => team.teamId);
 
-      // Fetch team details
       const teamPromises = teamIds.map(id =>
         fetch(`${API_BASE_URL}/api/Teams/get-team/${id}`).then(res => res.json())
       );
@@ -76,14 +67,12 @@ const TeamDutyList = () => {
     }
   };
 
-  // Handles the team change event
   const handleTeamChange = (event) => {
     const selectedTeamId = event.target.value;
     setSelectedTeamId(selectedTeamId);
     fetchGuardDutiesByTeam(selectedTeamId);
   };
 
-  // Fetches the initial data
   useEffect(() => {
     fetchGuardDuties();
   }, []);
@@ -106,7 +95,7 @@ const TeamDutyList = () => {
               
               <th>Başlangıç Tarihi</th>
               <th>Başlangıç Tarihi</th>
-              <th>İsim Soyisim</th> {/* Updated column header */}
+              <th>İsim Soyisim</th> 
               <th>Nöbet Atanma Tarihi</th>
               <th>Nöbet Atayan Kişi</th>
             </tr>
@@ -114,10 +103,9 @@ const TeamDutyList = () => {
           <tbody>
             {guardDuties.map(duty => (
               <tr key={duty.id}>
-                
                 <td>{new Date(duty.startDate).toLocaleDateString()}</td>
                 <td>{new Date(duty.endDate).toLocaleDateString()}</td>
-                <td>{duty.wardenUsername}</td> {/* Updated cell */}
+                <td>{duty.wardenUsername}</td> 
                 <td>{new Date(duty.dateOfAssignment).toLocaleDateString()}</td>
                 <td>{duty.guardAssignedByUser}</td>
               </tr>

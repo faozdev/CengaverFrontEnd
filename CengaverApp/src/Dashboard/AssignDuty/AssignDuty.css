@@ -1,50 +1,45 @@
-/* General styling for the page */
 h1 {
-    font-size: 20px; /* Reduced font size */
+    font-size: 20px; 
     color: #333;
-    margin-bottom: 15px; /* Reduced margin */
+    margin-bottom: 15px; 
   }
   
   .assignDuty {
-    max-width: 500px; /* Reduced width */
-    margin: 100px auto; /* Adjusted margin-top */
-    padding: 15px; /* Reduced padding */
+    max-width: 500px; 
+    margin: 100px auto; 
+    padding: 15px; 
   }
-  
-  /* Form container styling */
+ 
   form {
-    max-width: 500px; /* Reduced width */
+    max-width: 500px; 
     margin: 0 auto;
-    padding: 15px; /* Reduced padding */
+    padding: 15px; 
   }
   
-  /* Styling for form labels */
   label {
     display: block;
-    margin-bottom: 8px; /* Reduced margin */
-    font-size: 14px; /* Reduced font size */
+    margin-bottom: 8px;
+    font-size: 14px;
     color: #333;
   }
   
-  /* Styling for form inputs */
   input[type="datetime-local"],
   input[type="text"],
   select {
     width: 100%;
-    padding: 8px; /* Reduced padding */
-    margin-top: 4px; /* Reduced margin */
+    padding: 8px; 
+    margin-top: 4px; 
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
-  /* Styling for the submit button */
+
   button[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 15px; /* Reduced padding */
-    font-size: 14px; /* Reduced font size */
+    padding: 10px 15px; 
+    font-size: 14px; 
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
@@ -53,15 +48,13 @@ h1 {
   button[type="submit"]:hover {
     background-color: #0056b3;
   }
-  
-  /* Styling for select elements */
+
   select {
-    height: 35px; /* Reduced height */
+    height: 35px; 
   }
-  
-  /* Optional: Add some margin between form fields */
+
   label + input,
   label + select {
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px; 
   }
   

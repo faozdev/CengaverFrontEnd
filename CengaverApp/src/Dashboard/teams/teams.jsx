@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../../main';
 import TopBar from '../../Dashboard/TopBar';
-import addIcon from '../../assets/add.png'; // Import the add icon
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css'; // Import default styling for toast notifications
+import addIcon from '../../assets/add.png'; 
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const TeamsPage = () => {
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [teamUsers, setTeamUsers] = useState([]);
   const [error, setError] = useState(null);
-  const [showComboBox, setShowComboBox] = useState(false); // State to manage combo box visibility
+  const [showComboBox, setShowComboBox] = useState(false); 
   const [userOptions, setUserOptions] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
   const navigate = useNavigate();
@@ -138,7 +138,6 @@ const TeamsPage = () => {
 
         const result = await response.json();
         if (result.isSuccess) {
-          // Show success toast notification
           toast.success('Kullanıcı başarıyla eklendi!');
           await handleTeamClick(selectedTeam);
           setShowComboBox(false);
@@ -155,10 +154,8 @@ const TeamsPage = () => {
   return (
     <div style={{ padding: '20px' }}>
       <TopBar user={{}} handleLogout={() => {}} />
-
       <div className="container mt-5">
         {error && <div>{error}</div>}
-        
         <div className="row">
           <div className="col-md-4">
             <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Takımlar</h2>
@@ -258,8 +255,7 @@ const TeamsPage = () => {
           </div>
         </div>
       </div>
-
-      <ToastContainer /> {/* Add ToastContainer to the component */}
+      <ToastContainer /> 
     </div>
   );
 };

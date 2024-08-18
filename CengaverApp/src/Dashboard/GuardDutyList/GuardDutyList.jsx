@@ -17,7 +17,7 @@ const GuardDutiesPage = () => {
 
         if (data && Array.isArray(data)) {
           setGuardDuties(data);
-          // Fetch names for each wardenUserId
+
           const userIds = [...new Set(data.map(duty => duty.wardenUserId))];
           const nameRequests = userIds.map(id =>
             fetch(`${API_BASE_URL}/api/Users/get-username/${id}`)
@@ -66,8 +66,7 @@ const GuardDutiesPage = () => {
     <div>
       <TopBar user={{}} handleLogout={() => {}} /> 
       <div className="container mt-5">
-        {error && <div>{error}</div>}
-        
+        {error && <div>{error}</div>}  
         <h2>Nöbet Tablosu</h2>
         <table className="table">
           <thead>
